@@ -419,72 +419,8 @@ La variabile `j` deve contenere i seguenti dati:
         3
     ]
 
-## 4. Come testare il vostro codice?
  
-Ricordate la regola generale: la scrittura del codice è solo metà del lavoro! La metà rimanente consiste nel progettare dei test approfonditi per rilevare eventuali bug. In fase di valutazione, il nostro compito sarà quello di mettere sotto stress il vostro codice (testandolo sui file più disparati, sia in formato json valido che non, e combinando operatori in tutti i modi possibili), quindi progettate degli ottimi test e ricordatevi di compilare il codice con gli strumenti di debug mostrati a lezione (assert, compiler sanitizers). Ricordatevi anche di usare Valgrind.
- 
-Detto questo, consigliamo di crearvi un file test.cpp in cui definirete una funzione `main` che testa l'oggetto `json` da voi scritto. Questo file test.cpp **non** deve essere consegnato (dovrete consegnare solo json.cpp, leggi sotto): serve solo a voi per testare il vostro codice. Testate ogni metodo di `json` in maniera isolata, su molti test case. Verificate che non ci siano memory leaks. L'output di Valgrind deve sempre terminare con:
-
-	ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-	
-Ogni errore di memoria che troveremo verrà penalizzato. 
- 
-
-## 5. Consegna del progetto
-
-Noi vi forniamo un file json.hpp (in questo repository GitHub) che contiene le dichiarazioni della classe e gli unici `#include` ammessi. 
-
-**Nota.** Il file json.hpp **non** deve essere modificato in alcun modo. Noi, infatti, compileremo e testeremo il vostro codice con il file json.hpp fornito da noi (e non con quello che voi potreste aver modificato).
-
-Il vostro compito sarà quello di implementare il file json.cpp, contenente la definizione di tutti i metodi/tipi descritti sopra. Note importanti: 
-
-1. json.cpp può solo includere json.hpp. Non può contenere nessun altro #include e nessuna macro (in generale, nessun codice preceduto da #, eccetto `#include "json.hpp"`). Tutti gli include e macro verranno automaticamente rimossi prima di compilare il vostro codice. Gli unici `#include` ammessi sono quelli presenti nel file json.hpp fornito da noi.
-2. json.cpp **non** deve definire la funzione `main`: saremo noi a scriverla per testare il vostro codice. Se definite la funzione `main`, il codice non compilerà.
-
-### Formato e link per la consegna
-
-Ogni studente deve consegnare il proprio file json.cpp (con esattamente questo nome), contenuto dentro ad una cartella il cui nome deve essere la matricola dello studente, archiviata e compressa in un file tar.gz creato come descritto qui sotto. Questo archivio è l'unico file che va consegnato tramite il modulo moodle che troverete nella pagina moodle del modulo 1 (<https://moodle.unive.it/course/view.php?id=13453>). 
-
-Esempio: se la mia matricola è 012345 e mi trovo dentro ad una cartella contenente la mia implementazione json.cpp, per creare l'archivio devo seguire i seguenti passi (da terminale Ubuntu):
-
-    mkdir 012345
-    mv json.cpp 012345
-    tar -zcvf 012345.tar.gz 012345
-
-Questi passi creano il file `012345.tar.gz`, che deve essere consegnato tramite moodle. Se volete verificare che la creazione dell'archivio sia andata a buon fine, il seguente comando estrae l'archivio:
-
-    tar -xvzf 012345.tar.gz
-
-**Importante**: seguite **esattamente** queste istruzioni. Lanceremo uno script che estrae e compila automaticamente tutti i vostri progetti, quindi ogni minimo errore (esempio: archivio non in formato tar.gz, nome cartella sbagliato, nome file diverso da json.cpp) porterà all'esclusione automatica del progetto. 
-
-Le scadenze di giugno sono:
-
-- **14 giugno ore 23:59**
-- **27 giugno ore 23:59**
-
-I prossimi appelli saranno a settembre e gennaio. 
-
-Il modulo moodle per la consegna verrà aperto a breve e potrete cominciare a consegnare da subito. Potete ri-consegnare un numero illimitato di volte. Ad intervalli regolari (solitamente, ogni 2 settimane) noi scarichiamo tutti i progetti consegnati e li testiamo, segnalando eventuali problemi (per esempio, memory leaks, segmentation faults, ecc) via mail direttamente agli interessati. Dopo la scadenza il modulo per la consegna verrà disattivato e l’ultima consegna che avete fatto verrà valutata.
-
-**Importante**: consigliamo di consegnare con largo anticipo rispetto alla scadenza, in modo da ricevere utili feedback! Come detto sopra, testiamo i vostri codici ogni circa 2 settimane. Evitate di consegnare all’ultimo: dopo la consegna non potrete più apportare modifiche quindi se il vostro programma contiene bug verrete valutati negativamente.
-
-  
-
-## 6. Valutazione del progetto
-
-Ogni metodo da voi scritto verrà testato da noi in modo accurato, su molti input diversi (file json sia in formato valido che non). 
-
-Compileremo il vostro codice con lo standard C++ 17 (compiler flag `-std=c++17`).
-
-Un metodo che porta all’interruzione inaspettata del codice (esempio, segmentation fault) viene valutato 0 punti. Un metodo non implementato viene valutato 0 punti. Alcuni metodi, come quelli su iteratori, sono molto importanti perché ci permettono di testare il vostro codice (accedendo al contenuto del container): fate attenzione ad implementarli correttamente, altrimenti non avremo modo di testare il vostro codice. 
 
 ### Timeout
 
 Attenzione: il vostro codice deve essere ragionevolmente veloce. Imposteremo un timeout di qualche minuto (in realtà dovrebbero bastare pochi secondi) per la lettura di file json e costruzione dell’oggetto json corrispondente (vedi link con dataset json fornito sopra). Se il vostro codice impiega troppo tempo ad eseguire il parsing di un file json grosso, probabilmente avete implementato male l’inserimento di dati in liste/dizionari: ricordate che gli inserimenti non devono scorrere tutti gli elementi della lista/dizionario (ma, per esempio, devono solo allocare una nuova cella in memoria e sistemare qualche puntatore - se usate le liste per entrambe queste due strutture).
-
-### Plagi
-
-I vostri codici verranno confrontati utilizzando un rilevatore di plagi. Questo strumento è in grado di rilevare tentativi di mascherare copiature di codice come rinomina di variabili, conversione di cicli for in cicli while, etc. Tutti i progetti coinvolti in copiature saranno considerati falliti automaticamente. Tenete bene a mente queste semplici regole: 
-
-1. **Mai** passare il codice ad uno compagno che deve ancora sostenere l’esame. Costui infatti potrebbe copiare (anche solo in parte), con la conseguenza che entrambi non passerete l’esame. Discutere idee generali sulla soluzione va bene, ma il codice non deve mai essere condiviso. 
-2. Non postate porzioni del vostro codice online (per esempio, su forum). Altri studenti potrebbero copiare il codice ed entrambi non passerete l’esame (in passato è successo anche questo).
